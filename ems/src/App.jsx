@@ -11,6 +11,7 @@ import Employees from "./pages/admin/Employees"
 import Tasks from "./pages/admin/Tasks"
 import Submissions from "./pages/admin/Submissions"
 import Reports from "./pages/admin/Reports"
+import AdminProfile from './pages/admin/AdminProfile'
 import EmployeeDashboard from './pages/employee/EmployeeDashboard'
 import MyTasks from "./pages/employee/MyTasks"
 import SubmitWork from "./pages/employee/SubmitWork"
@@ -71,6 +72,8 @@ const App = () => {
       <Route path="/admin/tasks"       element={user && isAdmin ? <Tasks />          : <Navigate to="/" />} />
       <Route path="/admin/submissions" element={user && isAdmin ? <Submissions />    : <Navigate to="/" />} />
       <Route path="/admin/reports"     element={user && isAdmin ? <Reports />        : <Navigate to="/" />} />
+      <Route path="/admin/profile" element={user && isAdmin ? <AdminProfile /> : <Navigate to="/" />} />
+
 
       {/* Employee routes */}
       <Route path="/employee/dashboard"  element={user && role === 'employee' ? <EmployeeDashboard /> : <Navigate to="/" />} />
