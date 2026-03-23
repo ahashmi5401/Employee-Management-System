@@ -6,7 +6,7 @@ import { useAdminStats } from '../../hooks/useStats'
 import TaskTable from '../../components/admin/TaskTable'
 import AddTaskModal from '../../components/admin/AddTaskModal'
 import EditTaskModal from '../../components/admin/EditTaskModal'
-import { getTaskPageStats } from '../../data/admin/adminStatConfig'
+import { getTaskPageStats } from '../../data/admin/AdminStatConfig'
 
 const Tasks = () => {
   const [showModal, setShowModal] = useState(false)

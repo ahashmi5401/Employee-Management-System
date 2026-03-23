@@ -1,0 +1,30 @@
+{
+     "users": {
+    "tGfXnZUovaesFbrbmIym4BzXPTW2": {
+      "name": "Admin",
+      "email": "admin@smart-ems.com",
+      "role": "admin"
+    },
+    "employee_001": {
+      "name": "Muhammad Ayan Hashmi",
+      "email": "ayan@smart-ems.com",
+      "role": "employee",
+      "designation": "Frontend Developer",
+      "department": "Engineering"
+    },
+    "employee_002": {
+      "name": "Sara Raza",
+      "email": "sara@smart-ems.com",
+      "role": "employee",
+      "designation": "Backend Developer",
+      "department": "Engineering"
+    },
+    "employee_003": {
+      "name": "M. Hasan",
+      "email": "hasan@smart-ems.com",
+      "role": "employee",
+      "designation": "UI Designer",
+      "department": "Design"
+    }
+  }
+}

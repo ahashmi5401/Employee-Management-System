@@ -1,6 +1,6 @@
 import { useAdminStats } from '../../hooks/useStats'
 import StatList from './StatList'
-import { getDashboardStats } from '../../data/admin/adminStatConfig'
+import { getDashboardStats } from '../../data/admin/AdminStatConfig'
 
 const DashboardStat = () => {
   const stats = useAdminStats()

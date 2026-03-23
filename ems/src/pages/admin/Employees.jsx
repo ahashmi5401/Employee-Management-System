@@ -6,7 +6,7 @@ import EmployeeTable from '../../components/admin/EmployeeTable'
 import AddEmployeeModal from '../../components/admin/AddEmployeeModal'
 import EditEmployeeModal from '../../components/admin/EditEmployeeModal'
 import { useAdminStats } from '../../hooks/useStats'
-import { getEmployeePageStats } from '../../data/admin/adminStatConfig'
+import { getEmployeePageStats } from '../../data/admin/AdminStatConfig'
 import { auth, db } from '../../firebase'
 import { ref, get } from 'firebase/database'
 
