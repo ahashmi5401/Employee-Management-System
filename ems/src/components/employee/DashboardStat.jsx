@@ -1,9 +1,11 @@
 import React from 'react'
 import StatList from '../admin/StatList'
-import MyTaskStat from '../../data/employee/MyTaskStat'
+import {useEmployeeStats} from '../../hooks/useEmployeeStats'
+import { getDashboardStats } from '../../data/employee/EmployeeStatConfig'
 const DashboardStat = () => {
+  const stats = useEmployeeStats()
   return (
-    <StatList data={MyTaskStat} cols='grid-cols-4'/>
+    <StatList data={getDashboardStats(stats)} cols='grid-cols-4'/>
   )
 }
 

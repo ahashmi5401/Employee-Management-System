@@ -6,11 +6,11 @@ import SubmissionTable from '../../components/admin/SubmissionTable'
 
 const Submissions = () => {
   return (
-    <div className='flex h-screen bg-zinc-950'>
+    <div className='flex h-screen bg-zinc-950 overflow-hidden'>
       <Sidebar />
-      <div className="flex flex-col flex-1">
-        <Navbar title="Submissions" subTitle="Review submissions" btnText='Add Employee' />
-        <main className='flex-1 flex flex-col overflow-y-auto p-6'>
+      <div className="flex flex-col flex-1 overflow-hidden">
+        <Navbar title="Submissions" subTitle="Review submissions"  />
+        <main className='flex-1 overflow-y-auto p-6'>
           <SubmissionStats />
           <SubmissionTable />
         </main>

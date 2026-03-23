@@ -1,12 +1,12 @@
+import { useAdminStats } from '../../hooks/useStats'
 import StatList from './StatList'
-import dashboardStat from '../../data/admin/dashboardStat'
-
-import React from 'react'
+import { getDashboardStats } from '../../data/admin/adminStatConfig'
 
 const DashboardStat = () => {
-  return (
-     <StatList data = {dashboardStat} cols="grid-cols-4"/>
-  )
+  const stats = useAdminStats()
+
+
+  return <StatList data={getDashboardStats(stats)} cols='grid-cols-5' />
 }
 
-export default DashboardStat;
+export default DashboardStat

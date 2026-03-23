@@ -10,7 +10,7 @@ const Reports = () => {
       <Sidebar />
       <div className="flex flex-col flex-1">
         <Navbar title="Reports" subTitle="View all reports" />
-        <main className='flex-1 flex flex-col overflow-y-auto p-6'>
+        <main className='flex-1 gap-4 flex flex-col overflow-auto p-6'>
           <ReportStats />
           <ReportStatusCreate />
         </main>

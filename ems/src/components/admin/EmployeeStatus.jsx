@@ -1,79 +1,92 @@
-import React from "react";
-import EmployeeData from "../../data/admin/Employee";
-import { NavLink } from "react-router-dom";
-
+import React, { useEffect, useState } from 'react'
+import { db } from '../../firebase'
+import { ref, onValue } from 'firebase/database'
 
 const EmployeeStatus = () => {
+  const [employees, setEmployees] = useState([])
+  const [status, setStatus] = useState({})
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Employees fetch
+    const empRef = ref(db, 'users')
+    const unsubEmp = onValue(empRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val()
+        const empList = Object.entries(data)
+          .filter(([_, val]) => val.role === 'employee')
+          .map(([uid, val]) => ({ uid, ...val }))
+        setEmployees(empList)
+      }
+      setLoading(false)
+    })
+
+    // Status fetch
+    const statusRef = ref(db, 'status')
+    const unsubStatus = onValue(statusRef, (snapshot) => {
+      if (snapshot.exists()) {
+        setStatus(snapshot.val())
+      }
+    })
+
+    return () => {
+      unsubEmp()
+      unsubStatus()
+    }
+  }, [])
+
+  const getInitials = (name) => {
+    if (!name) return 'NA'
+    const parts = name.split(' ')
+    return parts[0]?.charAt(0) + (parts[1]?.charAt(0) || '')
+  }
+
+  const colors = ['bg-red-500', 'bg-blue-500', 'bg-purple-500', 'bg-emerald-500', 'bg-amber-500']
+
+  if (loading) return <p className='text-zinc-500 text-sm'>Loading...</p>
+
   return (
-    <div  className="scrollBar border-2 border-zinc-800 flex-1 bg-zinc-900 rounded-2xl max-h-[320px] overflow-y-auto">
+    <div className='border border-zinc-800 bg-zinc-900 rounded-2xl flex-1 flex flex-col max-h-[320px]'>
+
       <div className="flex justify-between px-4 py-3 items-center border-b border-zinc-800 sticky top-0 bg-zinc-900 rounded-t-2xl z-10">
-        <h2 className="text-white text-sm font-semibold">Recent Submissions</h2>
-        <NavLink to={'/admin/employees'} key={1} className={"text-red-500 cursor-pointer hover:text-red-400 text-xs font-medium transition-all"}>View all</NavLink>      </div>
-      <div className="flex flex-col px-4 mt-2 py-2 gap-2">
-        {EmployeeData.map((item) => {
-          const {
-            id,
-            profile,
-            profileBg,
-            fullName,
-            assignedTasks,
-            status,
-            statusStyle,
-          } = item;
+        <h2 className="text-white text-sm font-semibold">Employees</h2>
+        <span className="text-zinc-500 text-xs">{employees.length} total</span>
+      </div>
+
+      <div className="flex flex-col gap-2 px-3 py-3 overflow-y-auto scrollBar">
+        {employees.map(({ uid, name, designation }, index) => {
+          const isOnline = status[uid]?.online === true
           return (
-            <div
-              key={id}
-              className="flex justify-between bg-zinc-950 rounded-xl px-3 py-3 items-center"
-            >
+            <div key={uid} className="flex justify-between bg-zinc-950 rounded-xl px-3 py-3 items-center">
               <div className="flex gap-3 items-center">
-                <div
-                  className={`rounded-full ${profileBg} h-9 w-9 justify-center text-white flex items-center text-xs font-semibold flex-shrink-0`}
-                >
-                  {profile}
+                <div className="relative">
+                  <div className={`rounded-full ${colors[index % colors.length]} h-9 w-9 flex items-center justify-center text-white text-xs font-semibold`}>
+                    {getInitials(name)}
+                  </div>
+                  {/* Online indicator */}
+                  <div className={`w-2.5 h-2.5 rounded-full border-2 border-zinc-950 absolute -bottom-0.5 -right-0.5 ${
+                    isOnline ? 'bg-green-500' : 'bg-zinc-500'
+                  }`} />
                 </div>
                 <div>
-                  <p className="text-white text-sm font-medium">{fullName}</p>
-                  <span className="text-zinc-500 text-xs">
-                    {assignedTasks} tasks assigned
-                  </span>
+                  <p className="text-white text-sm font-medium">{name}</p>
+                  <span className="text-zinc-500 text-xs">{designation}</span>
                 </div>
               </div>
-
-              <span
-                className={`${statusStyle} text-xs font-semibold px-3 py-1 rounded-full`}
-              >
-                {status}
+              <span className={`text-xs font-semibold px-3 py-1 rounded-full ${
+                isOnline
+                  ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                  : 'bg-zinc-500/10 text-zinc-400 border border-zinc-500/20'
+              }`}>
+                {isOnline ? 'Online' : 'Offline'}
               </span>
             </div>
-          );
+          )
         })}
       </div>
-    </div>
-  );
-};
-// <div className='border-2 border-zinc-800 bg-zinc-900 rounded'>
-//     <div className="flex justify-between w-[400px] px-3 py-4 items-center">
-//         <h2 className='text-white text-2xl'>Employees</h2>
-//         <span className='text-red-500'>View all</span>
-//     </div>
-//     <div className='flex flex-col px-4 mt-2'>
-//       <div className="flex justify-between bg-zinc-950 rounded-2xl px-2 py-4 items-center">
-//         <div className=" flex gap-2 items-center">
-//             <div className="rounded-full  bg-red-500 h-10 w-10 justify-center text-white flex items-center">
-//               AD
-//             </div>
-//             <div>
-//               <p className='text-white'>Ayan Hashmi</p>
-//               <span className='text-zinc-500 task-sm'>3 task assign</span>
-//             </div>
-//         </div>
-//         <p className='cursor-pointer bg-green-200 text-green-800 rounded-2xl px-4 py-2 border-green-900 border-2 hover:bg-green-300'>
-//           Active
-//         </p>
-//       </div>
-//     </div>
-// </div>
-//   )
-// }
 
-export default EmployeeStatus;
+    </div>
+  )
+}
+
+export default EmployeeStatus

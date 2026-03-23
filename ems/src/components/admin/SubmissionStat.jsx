@@ -1,11 +1,12 @@
 import StatList from "./StatList";
-import SubmissionStatsData from "../../data/admin/SubmissionStats"
-
 import React from 'react'
+import { useAdminStats } from "../../hooks/useStats";
+import { getSubmissionPageStats } from '../../data/admin/adminStatConfig'
 
 const SubmissionStat = () => {
+ let  stats = useAdminStats()
   return (
-    <StatList data={SubmissionStatsData} cols='grid-cols-4'/>
+    <StatList data={getSubmissionPageStats(stats)} cols='grid-cols-4'/>
   )
 }
 

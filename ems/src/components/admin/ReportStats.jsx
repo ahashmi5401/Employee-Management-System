@@ -1,11 +1,14 @@
 import StatList from './StatList'
-import ReportStat from '../../data/admin/ReportStat'
+import {getReportPageStats} from '../../data/admin/AdminStatConfig'
+import {useAdminStats} from'../../hooks/useStats'
 
-import React from 'react'
 
 const ReportStats = () => {
+  const stats = useAdminStats()
   return (
-    <StatList data={ReportStat} cols='grid-cols-4' />
+    <div className='mb-4'>
+      <StatList data={getReportPageStats(stats)} cols='grid-cols-4' />
+    </div>
   )
 }
 

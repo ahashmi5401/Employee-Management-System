@@ -2,7 +2,7 @@ import { auth, db } from '../firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 import { ref, set } from 'firebase/database'
 
-export const createEmployee = async (name, email, password, designation, department, adminEmail, adminPassword) => {
+export const createEmployee = async (name, email, password, designation, department, role , adminEmail, adminPassword) => {
   try {
     const employeeCredential = await createUserWithEmailAndPassword(auth, email, password)
     const employeeUID = employeeCredential.user.uid
@@ -10,7 +10,7 @@ export const createEmployee = async (name, email, password, designation, departm
     await set(ref(db, `users/${employeeUID}`), {
       name,
       email,
-      role: 'employee',
+      role,
       designation,
       department,
     })

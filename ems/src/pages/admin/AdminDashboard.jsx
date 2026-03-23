@@ -7,7 +7,7 @@ import logout from '../../utils/logout'
 
 const AdminDashboard = () => {
   return (
-    <div className='flex h-screen bg-zinc-950'>
+    <div className='flex h-screen bg-zinc-950 overflow-y-auto scrollBar'>
       
       <Sidebar />
 
