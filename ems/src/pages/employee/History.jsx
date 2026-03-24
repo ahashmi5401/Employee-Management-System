@@ -14,7 +14,7 @@ const History = () => {
       <Sidebar />
       <div className="flex flex-col flex-1 overflow-hidden">
         <Navbar title="History" subTitle="Your submission history" />
-        <main className="flex-1 overflow-y-auto p-4 md:p-6">
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 scrollBar">
           <div className="flex flex-col gap-4">
             <StatList data={getHistoryStats(stats)} cols={"grid-cols-3"} />
             <HistoryTable /> {/* ya MyTaskTable ya koi bhi */}

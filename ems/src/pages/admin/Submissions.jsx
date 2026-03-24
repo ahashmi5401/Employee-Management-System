@@ -10,7 +10,7 @@ const Submissions = () => {
       <Sidebar />
       <div className="flex flex-col flex-1 overflow-hidden">
         <Navbar title="Submissions" subTitle="Review submissions"  />
-        <main className='flex-1 overflow-y-auto p-6'>
+        <main className='flex-1 overflow-y-auto p-6 scrollBar'>
           <SubmissionStats />
           <SubmissionTable />
         </main>

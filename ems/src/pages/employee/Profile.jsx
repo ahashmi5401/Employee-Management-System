@@ -12,7 +12,7 @@ const Profile = () => {
     <Sidebar />
     <div className='flex flex-col flex-1'>
       <Navbar title={"Profile"} subTitle={"Your Account , details"} btnText=''/>
-      <main className='flex-1 overflow-y-auto p-6'>
+      <main className='flex-1 overflow-y-auto p-6 scrollBar'>
         <div className="grid grid-cols-1 shrink-0 gap-3 md:grid-cols-2">
         <InfoCard />
         <QuickStats />

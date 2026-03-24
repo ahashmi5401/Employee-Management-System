@@ -13,7 +13,7 @@ const AdminDashboard = () => {
 
       <div className='flex flex-col flex-1'>
         <Navbar title="Dashboard" subTitle="Welcome back, Admin" btnText={"Log Out"} onBtnClick={logout} />
-        <main className='flex-1 overflow-y-auto p-6'>
+        <main className='flex-1 overflow-y-auto p-6 scrollBar'>
           <DashboardStat />
           {/* page content yahan aayega */}
           <DashboardStatus />

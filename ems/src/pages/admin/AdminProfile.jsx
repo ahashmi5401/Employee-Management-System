@@ -66,123 +66,158 @@ const AdminProfile = () => {
       <Sidebar />
       <div className='flex flex-col flex-1 min-w-0'>
         <Navbar title="Profile" subTitle="Manage your account" />
-        <main className='flex-1 overflow-y-auto p-4 md:p-6'>
-          <div className='max-w-2xl mx-auto flex flex-col gap-4'>
+        <main className='flex-1 overflow-y-auto p-4 md:p-6 scrollBar'>
+           <div className="max-w-5xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mb-10">
+          <h1 className="text-2xl font-bold text-zinc-100">My Profile</h1>
+          <p className="text-zinc-500 text-sm mt-1">Manage your account settings</p>
+        </div>
 
-            {/* Profile Info */}
-            <div className='bg-zinc-900 border border-zinc-800 rounded-2xl p-5'>
-              <div className='border-b border-zinc-800 pb-3 mb-4'>
-                <h2 className='text-white text-sm font-semibold'>Profile Info</h2>
-                <span className='text-zinc-500 text-xs'>Update your name and designation</span>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column - Avatar Card */}
+          <div className="lg:col-span-1">
+            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex flex-col items-center text-center">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-3xl font-bold text-white shadow-lg shadow-red-900/30 mb-4">
+                {profile?.name?.charAt(0) || 'A'}
               </div>
+              <h2 className="text-lg font-semibold text-zinc-100">{profile?.name || 'Admin'}</h2>
+              <p className="text-zinc-500 text-sm mt-0.5">{profile?.email}</p>
+              <span className="mt-3 inline-block bg-red-600/15 text-red-500 text-xs font-medium px-3 py-1 rounded-full border border-red-600/20">
+                {profile?.role}
+              </span>
 
-              {/* Avatar */}
-              <div className='flex items-center gap-4 mb-4 pb-4 border-b border-zinc-800'>
-                <div className='w-14 h-14 bg-red-600 rounded-xl flex items-center justify-center text-white text-xl font-bold'>
-                  {profile?.name?.charAt(0) || 'A'}
+              <div className="w-full mt-6 pt-6 border-t border-zinc-800 space-y-3 text-left">
+                <div>
+                  <p className="text-[11px] uppercase tracking-wider text-zinc-600 font-medium">Designation</p>
+                  <p className="text-sm text-zinc-300 mt-0.5">{profile?.designation || '—'}</p>
                 </div>
                 <div>
-                  <p className='text-white text-sm font-semibold'>{profile?.name || 'Admin'}</p>
-                  <p className='text-zinc-500 text-xs'>{profile?.email}</p>
-                  <span className='bg-purple-500/10 text-purple-400 border border-purple-500/20 text-xs font-semibold px-2 py-0.5 rounded-full capitalize'>
-                    {profile?.role}
-                  </span>
+                  <p className="text-[11px] uppercase tracking-wider text-zinc-600 font-medium">Email</p>
+                  <p className="text-sm text-zinc-300 mt-0.5">{profile?.email}</p>
                 </div>
               </div>
+            </div>
+          </div>
 
-              {nameSuccess && (
-                <div className='bg-green-500/10 border border-green-500/20 rounded-xl px-4 py-2.5 mb-3'>
-                  <p className='text-green-400 text-xs font-medium'>✓ Profile updated!</p>
+          {/* Right Column - Forms */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Profile Info */}
+            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-8">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-lg font-semibold text-zinc-100">Profile Info</h2>
+                  <p className="text-zinc-500 text-sm mt-0.5">Update your name and designation</p>
                 </div>
-              )}
+                {nameSuccess && (
+                  <span className="text-green-500 text-sm font-medium bg-green-500/10 px-3 py-1 rounded-full">
+                    ✓ Profile updated!
+                  </span>
+                )}
+              </div>
 
-              <form onSubmit={handleUpdateProfile} className='flex flex-col gap-3'>
-                <div className='flex flex-col gap-1.5'>
-                  <label className='text-zinc-500 text-xs font-semibold tracking-widest uppercase'>Full Name</label>
-                  <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className='bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-300 text-sm outline-none focus:border-red-600 transition-all'
-                  />
+              <form onSubmit={handleUpdateProfile} className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-zinc-400 text-sm mb-2 font-medium">Full Name</label>
+                    <input
+                      type='text'
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className='w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-300 text-sm outline-none focus:border-red-600 transition-all'
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-zinc-400 text-sm mb-2 font-medium">Designation</label>
+                    <input
+                      type='text'
+                      value={designation}
+                      onChange={(e) => setDesignation(e.target.value)}
+                      placeholder='e.g. HR Manager'
+                      className='w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-300 text-sm outline-none focus:border-red-600 transition-all placeholder-zinc-600'
+                    />
+                  </div>
                 </div>
-                <div className='flex flex-col gap-1.5'>
-                  <label className='text-zinc-500 text-xs font-semibold tracking-widest uppercase'>Designation</label>
+
+                <div>
+                  <label className="block text-zinc-400 text-sm mb-2 font-medium">Email</label>
                   <input
-                    value={designation}
-                    onChange={(e) => setDesignation(e.target.value)}
-                    placeholder='e.g. HR Manager'
-                    className='bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-300 text-sm outline-none focus:border-red-600 transition-all placeholder-zinc-600'
-                  />
-                </div>
-                <div className='flex flex-col gap-1.5'>
-                  <label className='text-zinc-500 text-xs font-semibold tracking-widest uppercase'>Email</label>
-                  <input
-                    value={profile?.email || ''}
+                    type='email'
+                    value={profile?.email}
                     disabled
-                    className='bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-600 text-sm outline-none cursor-not-allowed'
+                    className='w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-500 text-sm outline-none cursor-not-allowed opacity-60'
                   />
                 </div>
-                <button
-                  type='submit'
-                  disabled={nameLoading}
-                  className='bg-red-600 hover:bg-red-500 active:scale-95 text-white text-sm font-semibold py-3 rounded-xl transition-all disabled:opacity-50'
-                >
-                  {nameLoading ? 'Updating...' : 'Update Profile'}
-                </button>
+
+                <div className="flex justify-end pt-2">
+                  <button
+                    type='submit'
+                    disabled={nameLoading}
+                    className='bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-6 py-2.5 rounded-xl transition-all disabled:opacity-50'
+                  >
+                    {nameLoading ? 'Updating...' : 'Update Profile'}
+                  </button>
+                </div>
               </form>
             </div>
 
             {/* Change Password */}
-            <div className='bg-zinc-900 border border-zinc-800 rounded-2xl p-5'>
-              <div className='border-b border-zinc-800 pb-3 mb-4'>
-                <h2 className='text-white text-sm font-semibold'>Change Password</h2>
-                <span className='text-zinc-500 text-xs'>Security settings</span>
+            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-8">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-lg font-semibold text-zinc-100">Change Password</h2>
+                  <p className="text-zinc-500 text-sm mt-0.5">Security settings</p>
+                </div>
+                {passSuccess && (
+                  <span className="text-green-500 text-sm font-medium bg-green-500/10 px-3 py-1 rounded-full">
+                    ✓ Password updated!
+                  </span>
+                )}
               </div>
 
-              {passSuccess && (
-                <div className='bg-green-500/10 border border-green-500/20 rounded-xl px-4 py-2.5 mb-3'>
-                  <p className='text-green-400 text-xs font-medium'>✓ Password updated!</p>
-                </div>
-              )}
-
               {error && (
-                <div className='bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-2.5 mb-3'>
-                  <p className='text-red-400 text-xs font-medium'>{error}</p>
+                <div className="mb-5 bg-red-600/10 border border-red-600/20 text-red-400 text-sm px-4 py-3 rounded-xl">
+                  {error}
                 </div>
               )}
 
-              <form onSubmit={handleUpdatePassword} className='flex flex-col gap-3'>
-                <div className='flex flex-col gap-1.5'>
-                  <label className='text-zinc-500 text-xs font-semibold tracking-widest uppercase'>Current Password</label>
-                  <input
-                    type='password'
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                    placeholder='••••••••'
-                    className='bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-300 text-sm outline-none focus:border-red-600 transition-all placeholder-zinc-600'
-                  />
+              <form onSubmit={handleUpdatePassword} className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-zinc-400 text-sm mb-2 font-medium">Current Password</label>
+                    <input
+                      type='password'
+                      value={currentPassword}
+                      onChange={(e) => setCurrentPassword(e.target.value)}
+                      placeholder='••••••••'
+                      className='w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-300 text-sm outline-none focus:border-red-600 transition-all placeholder-zinc-600'
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-zinc-400 text-sm mb-2 font-medium">New Password</label>
+                    <input
+                      type='password'
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      placeholder='••••••••'
+                      className='w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-300 text-sm outline-none focus:border-red-600 transition-all placeholder-zinc-600'
+                    />
+                  </div>
                 </div>
-                <div className='flex flex-col gap-1.5'>
-                  <label className='text-zinc-500 text-xs font-semibold tracking-widest uppercase'>New Password</label>
-                  <input
-                    type='password'
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    placeholder='••••••••'
-                    className='bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-300 text-sm outline-none focus:border-red-600 transition-all placeholder-zinc-600'
-                  />
+
+                <div className="flex justify-end pt-2">
+                  <button
+                    type='submit'
+                    disabled={passLoading}
+                    className='bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-6 py-2.5 rounded-xl transition-all disabled:opacity-50'
+                  >
+                    {passLoading ? 'Updating...' : 'Update Password'}
+                  </button>
                 </div>
-                <button
-                  type='submit'
-                  disabled={passLoading}
-                  className='bg-red-600 hover:bg-red-500 active:scale-95 text-white text-sm font-semibold py-3 rounded-xl transition-all disabled:opacity-50'
-                >
-                  {passLoading ? 'Updating...' : 'Update Password'}
-                </button>
               </form>
             </div>
-
           </div>
+        </div>
+        </div>
         </main>
       </div>
     </div>
