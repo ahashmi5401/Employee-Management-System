@@ -29,7 +29,7 @@ const Tasks = () => {
           btnText="Assign Task"
           onBtnClick={() => setShowModal(true)}
         />
-        <main className='flex-1   overflow-y-auto  p-4 md:p-6 gap-4'>
+        <main className='flex-1   overflow-y-auto  p-4 md:p-6 gap-4 scrollBar'>
           <StatList data={getTaskPageStats(stats)} cols='grid-cols-4' />
           <TaskTable onEdit={handleEdit} />
         </main>
