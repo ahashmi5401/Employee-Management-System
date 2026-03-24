@@ -7,6 +7,7 @@ import TaskTable from '../../components/admin/TaskTable'
 import AddTaskModal from '../../components/admin/AddTaskModal'
 import EditTaskModal from '../../components/admin/EditTaskModal'
 import { getTaskPageStats } from '../../data/admin/AdminStatConfig'
+import { getNavbarIcon } from '../../data/admin/navIcon'
 
 const Tasks = () => {
   const [showModal, setShowModal] = useState(false)
@@ -27,6 +28,7 @@ const Tasks = () => {
           title="Tasks"
           subTitle="Manage all tasks"
           btnText="Assign Task"
+          icon={getNavbarIcon("Assign Task")}
           onBtnClick={() => setShowModal(true)}
         />
         <main className='flex-1   overflow-y-auto  p-4 md:p-6 gap-4 scrollBar'>

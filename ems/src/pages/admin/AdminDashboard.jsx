@@ -4,6 +4,7 @@ import Sidebar from '../../components/admin/Sidebar'
 import DashboardStat from '../../components/admin/DashboardStat'
 import DashboardStatus from '../../components/admin/DashboardStatus'
 import logout from '../../utils/logout'
+import { getNavbarIcon } from '../../data/admin/navIcon'
 
 const AdminDashboard = () => {
   return (
@@ -12,7 +13,7 @@ const AdminDashboard = () => {
       <Sidebar />
 
       <div className='flex flex-col flex-1'>
-        <Navbar title="Dashboard" subTitle="Welcome back, Admin" btnText={"Log Out"} onBtnClick={logout} />
+        <Navbar title="Dashboard" subTitle="Welcome back, Admin" btnText={"Log Out"} icon={getNavbarIcon('Log Out')} onBtnClick={logout} />
         <main className='flex-1 overflow-y-auto p-6 scrollBar'>
           <DashboardStat />
           {/* page content yahan aayega */}

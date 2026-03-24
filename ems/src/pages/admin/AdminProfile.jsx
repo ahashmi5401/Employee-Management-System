@@ -5,6 +5,7 @@ import { auth, db } from '../../firebase'
 import { ref, update } from 'firebase/database'
 import { updatePassword, EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth'
 import { useUserProfile } from '../../hooks/useUserProfile'
+import { getNavbarIcon } from '../../data/admin/navIcon'
 
 const AdminProfile = () => {
   const { profile } = useUserProfile()

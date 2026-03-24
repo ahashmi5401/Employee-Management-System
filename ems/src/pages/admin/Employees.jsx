@@ -9,6 +9,7 @@ import { useAdminStats } from '../../hooks/useStats'
 import { getEmployeePageStats } from '../../data/admin/AdminStatConfig'
 import { auth, db } from '../../firebase'
 import { ref, get } from 'firebase/database'
+import { getNavbarIcon } from '../../data/admin/navIcon'
 
 const Employees = () => {
   const stats = useAdminStats()
@@ -42,6 +43,7 @@ const Employees = () => {
           title="Employees"
           subTitle="Manage your team"
           btnText="Add Employee"
+          icon={getNavbarIcon('Add Employee')}
           onBtnClick={() => setShowModal(true)}
         />
         <main className='flex-1   overflow-y-auto  p-4 md:p-6 gap-4 scrollBar'>

@@ -2,7 +2,7 @@ import React from "react"
 import { useMediaQuery } from "../../hooks/useMediaQuery"
 import { getNavbarIcon } from "../../data/admin/navIcon"
 
-const Navbar = ({ title, subTitle, btnText, onBtnClick }) => {
+const Navbar = ({ title, subTitle, btnText, icon ,onBtnClick }) => {
   const { isMobile } = useMediaQuery()
 
   return (
@@ -23,7 +23,7 @@ const Navbar = ({ title, subTitle, btnText, onBtnClick }) => {
         >
           {isMobile ? getNavbarIcon(btnText) : (  // ← getNavbarIcon use karo
             <>
-              <span>+</span>
+              <span>{icon}</span>
               {btnText}
             </>
           )}
